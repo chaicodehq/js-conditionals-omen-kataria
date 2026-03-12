@@ -27,4 +27,20 @@
  */
 export function calculateTax(income) {
   // Your code here
+  if (typeof income !== 'number' || isNaN(income) || income <= 0) {
+    return 0;
+  }
+  let tax = 0;  
+  if (income > 70000) {
+    tax += 2000;  
+    tax += 8000;
+    tax += 0.30 * (income - 70000);
+  } else if (income > 30000) {    
+    tax += 2000;
+    tax += 0.20 * (income - 30000); 
+  } else if (income > 10000) {
+    tax += 0.10 * (income - 10000);
+  }
+  return tax; 
+  
 }

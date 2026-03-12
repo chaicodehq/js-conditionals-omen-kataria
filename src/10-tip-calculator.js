@@ -31,4 +31,25 @@
  */
 export function calculateTip(billAmount, serviceRating) {
   // Your code here
+  if (typeof billAmount !== 'number' || isNaN(billAmount) || billAmount <= 0) {
+    return null;
+  }
+  const tipPercentages = {
+    1: 5,
+    2: 10,
+    3: 15,
+    4: 20,
+    5: 25
+  };
+  if (!tipPercentages.hasOwnProperty(serviceRating)) {
+    return null;
+  } 
+  const tipPercentage = tipPercentages[serviceRating];
+  const tipAmount = parseFloat((billAmount * (tipPercentage / 100)).toFixed(2));
+  const totalAmount = parseFloat((billAmount + tipAmount).toFixed(2));
+  return {
+    tipPercentage,
+    tipAmount,
+    totalAmount
+  };
 }

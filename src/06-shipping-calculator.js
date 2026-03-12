@@ -30,4 +30,35 @@
  */
 export function calculateShipping(weight, country, orderTotal) {
   // Your code here
+  if (typeof weight !== 'number' || isNaN(weight) || weight <= 0) {
+    return -1;
+  }
+  if (typeof orderTotal !== 'number' || isNaN(orderTotal) || orderTotal < 0) {
+    return -1;
+  }
+  const isDomestic = country === "US";
+  if (isDomestic) {
+    if (orderTotal > 50) {
+      return 0; // Free shipping for domestic orders over $50
+    }
+    if (weight <= 1) {
+      return 5;
+    } else if (weight <= 5) {
+      return 10;
+    } else {
+      return 15;
+    } 
+  } else {
+    if (orderTotal > 100) {
+      return 0; // Free shipping for international orders over $100
+    } 
+    if (weight <= 1) {  
+      return 15;  
+    } else if (weight <= 5) {
+      return 25;
+    } else {  
+      return 40;  
+    }
+  }   
+  
 }
